@@ -1,0 +1,114 @@
+body {
+    font-family: monospace;
+    font-size: 12px;
+    text-align: center;
+    padding: 40px;
+    background-color: hsl(0, 0%, 98%);
+    color: hsl(0, 0%, 15%);
+    background-image: radial-gradient(circle, hsla(0, 0%, 15%, 0.15) 1px, transparent 1px);
+    background-size: 15px 15px;
+    animation: driftDots 50s linear infinite;
+}
+
+@keyframes driftDots {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -1000px 1000px;
+    }
+}
+
+div {
+    margin: 0 7.5vw;
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: 0px 5px 10px 5px hsla(0, 0%, 15%, 0.15);
+    padding: 15px 15px;
+    display: block;
+    align-content: center;
+    height: 82.5vh;
+}
+
+#detectBtn, #uploadBtn {
+    margin: 15px;
+    padding: 15px 25px;
+    font-family: monospace;
+    font-size: 12px;
+    background-color: hsl(0, 0%, 15%);
+    color: white;
+    border: 1px solid hsl(0, 0%, 15%);
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+#detectBtn:hover, #uploadBtn:hover {
+    font-family: monospace;
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 15%);
+}
+
+/**/
+
+
+input[type="radio"] {
+  margin: 0;
+  appearance: none; /* remove default look */
+
+  width: 12px;
+  height: 12px;
+
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 15%);
+  border-radius: 0%;
+
+  cursor: pointer;
+  transition: 0.5s ease;
+
+  position: relative;
+}
+
+input[type="radio"]::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+
+  background-color: white;
+  border-radius: 0%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+
+  transition: 0.5s ease;
+}
+
+input[type="radio"]:checked {
+  background-color: white;
+}
+
+input[type="radio"]:checked::after {
+  background-color: hsl(0, 0%, 15%);
+  transform: translate(-50%, -50%) scale(1);
+}
+
+input[type="radio"]:hover {
+  background-color: white;
+}
+/**/
+
+/**/
+#smallMessage {
+    font-size: 12px;
+    color: hsl(0, 0%, 15%, 0.5);
+}
+
+a {
+    color: hsl(0, 0%, 15%, 0.5);
+}
+/**/
+
+canvas {
+    margin: 15px 15px;
+    max-width: 50%;
+}

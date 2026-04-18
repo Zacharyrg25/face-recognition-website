@@ -1,0 +1,6 @@
+flask
+opencv-python
+numpy
+mtcnn
+tensorflow
+lz4

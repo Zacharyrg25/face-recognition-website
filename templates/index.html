@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div>
+        <p>Upload an image and an AI will draw boxes around any faces it finds!</p>
+
+        <input type="file" id="imageInput" accept="image/*" hidden>
+        <label id="uploadBtn" for="imageInput" class="custom-upload">
+            Upload Image
+        </label>
+
+        <button id="detectBtn">Detect Faces</button>
+        <p id="status"></p>
+
+        <!---->
+        Choose Method:
+        <label class="radio-btn">
+            <input type="radio" name="mode" value="haar" checked>
+            <span class="btn">Haar</span>
+        </label>
+
+        <label class="radio-btn">
+            <input type="radio" name="mode" value="mtcnn">
+            <span class="btn">MTCNN</span>
+        </label>
+        <!---->
+
+        <br>
+        <canvas id="canvas" hidden></canvas>
+
+        <br>
+        <p id="smallMessage">Click <a href="{{ url_for('about') }}">here</a> to learn more!</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

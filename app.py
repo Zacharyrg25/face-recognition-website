@@ -1,60 +1,63 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import cv2
 import numpy as np
-
-from mtcnn.mtcnn import MTCNN # NEW NEW NEW
+from mtcnn.mtcnn import MTCNN
 
 app = Flask(__name__)
 
-# Load the Haar Cascade face detector
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+# Load Haar.
+face_cascade = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
 
-# Load MTCNN # NEW NEW NEW
-face_mtcnn = MTCNN() # NEW NEW NEW
+# Load MTCNN.
+face_mtcnn = MTCNN()
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return render_template('index.html')
+    """Render the home page."""
+    return render_template("index.html")
+
 
 @app.route("/about")
 def about():
+    """Render the about page."""
     return render_template("about.html")
 
-@app.route('/detect', methods=['POST'])
+
+@app.route("/detect", methods=["POST"])
 def detect():
-    # Read the uploaded image
-    file = request.files['image']
+    """Detect faces in an uploaded image using the selected method."""
+    # Read the uploaded image.
+    file = request.files["image"]
     img_array = np.frombuffer(file.read(), np.uint8)
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
 
-    # Read the mode # NEW NEW NEW
-    mode = request.form['mode'] # NEW NEW NEW
-
-    # Convert to grayscale and detect faces
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
+    mode = request.form["mode"]
     boxes = []
 
-    # NEW NEW NEW SECTION
-    if mode == "haar":
-        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.05, minNeighbors=5, minSize=(30, 30)) # OLD
+    # Haar requires a grayscale image.
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    if mode == "Haar":
+        faces = face_cascade.detectMultiScale(
+            gray,
+            scaleFactor=1.05,
+            minNeighbors=5,
+            minSize=(30, 30),
+        )
         for (x, y, w, h) in faces:
-            boxes.append({'x': int(x), 'y': int(y), 'w': int(w), 'h': int(h)})
-    elif mode == "mtcnn":
+            boxes.append({"x": int(x), "y": int(y), "w": int(w), "h": int(h)})
+
+    elif mode == "MTCNN":
         faces = face_mtcnn.detect_faces(img)
         for face in faces:
-            x, y, w, h = face['box']
-            boxes.append({'x': int(x), 'y': int(y), 'w': int(w), 'h': int(h)})
-    # NEW NEW NEW SECTION
+            x, y, w, h = face["box"]
+            boxes.append({"x": int(x), "y": int(y), "w": int(w), "h": int(h)})
 
-    # OLD
-    # # Build the list of face boxes to send back
-    # boxes = []
-    # for (x, y, w, h) in faces:
-    #     boxes.append({'x': int(x), 'y': int(y), 'w': int(w), 'h': int(h)})
-    # OLD
+    return jsonify({"faces": boxes})
 
-    return jsonify({'faces': boxes})
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

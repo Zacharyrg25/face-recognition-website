@@ -7,21 +7,20 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div>
-        <p>This website uses two method of face recognition: Haar Cascades and MTCNN (Multi-task Cascaded Concolutional Neural Networks)!</p>
+    <main class="page">
+        <section class="card">
+            <p class="intro">This website uses two face detection methods: Haar Cascades and Multi-Task Cascaded Convolutional Neural Networks. (Click <a href="{{ url_for('index') }}">here</a> to go back.)</p>
 
-        <br>
-        <p>
-            <b>[Haar Cascades]</b> This method bla.
-        </p>
+            <section class="info-block">
+                <p class="section-title">Haar Cascades</p>
+                <p>Haar Cascades are a traditional face detection method that works by scanning an image with simple visual patterns (called Haar-like features) and using a cascade of quick tests to eliminate regions that are not faces. Because it rejects non-face areas early, it is very fast and efficient, making it useful for real-time applications. However, since it relies on handcrafted features rather than learning from data, it can struggle with faces at unusual angles, under different lighting conditions, or partially obscured.</p>
+            </section>
 
-        <br>
-        <p>
-            <b>[MTCNN]</b> This method bla.
-        </p>
-
-        <br>
-        <p id="smallMessage">Click <a href="{{ url_for('index') }}">here</a> to go back!</p>
-    </div>
+            <section class="info-block">
+                <p class="section-title">Multi-Task Convolutional Neural Networks</p>
+                <p>Multi-Task Cascaded Convolutional Neural Network are a modern deep learning-based method that detects faces using a sequence of neural networks that progressively refine their predictions. It first proposes possible face regions, then filters and adjusts them, and finally identifies precise facial features like the eyes, nose, and mouth. This multi-stage process allows MTCNN to detect faces more accurately across different sizes, angles, and lighting conditions, making it more robust than traditional methods.</p>
+            </section>
+        </section>
+    </main>
 </body>
 </html>

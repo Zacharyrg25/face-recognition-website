@@ -12,21 +12,21 @@ A Flask-based web application for detecting faces in images using two methods: H
 
 ### 2. Create a virtual environment
 
-python3.12 -m venv .venv
+`python3.12 -m venv .venv`
 
 ### 3. Activate the virtual environment
 
-Mac/Linux: source .venv/bin/activate  
+Mac/Linux: `source .venv/bin/activate`
 
-Windows: .venv\Scripts\activate  
+Windows: `.venv\Scripts\activate`
 
 ### 4. Install dependencies
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 ### 5. Run the app
 
-python app.py
+`python app.py`
 
 ### 6. Open in browser
 

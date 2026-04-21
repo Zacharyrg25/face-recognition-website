@@ -18,6 +18,7 @@ A Flask-based web application for detecting faces in images using two methods: H
 ### 1. Clone the repository
 
 git clone https://github.com/Zacharyrg25/face-recognition-website.git
+
 cd face-recognition-website
 
 ### 2. Create a virtual environment
